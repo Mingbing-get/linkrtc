@@ -73,7 +73,11 @@ export default class MeshRoomRTC<L extends string = string> {
     baseRTC?.peerConnection.close()
   }
 
-  send(id: string | string[] | undefined, label: L, data: string) {
+  send(
+    id: string | string[] | undefined,
+    label: L,
+    data: string | Blob | ArrayBuffer | ArrayBufferView,
+  ) {
     if (!id) {
       this.baseRTCMap.forEach((baseRTC) => {
         baseRTC.sendData(label, data)

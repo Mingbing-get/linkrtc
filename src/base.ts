@@ -123,14 +123,14 @@ export default class BaseRTC<L extends string = string> {
     return this
   }
 
-  sendData(label: L, data: string) {
+  sendData(label: L, data: string | Blob | ArrayBuffer | ArrayBufferView) {
     const channel = this.dataChannelMap.get(label)
     if (!channel || channel.readyState !== 'open') {
       console.error(`channel ${label} is not ready`)
       return
     }
 
-    channel.send(data)
+    channel.send(data as any)
   }
 
   addIceCandidate(candidate: RTCIceCandidate) {
